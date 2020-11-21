@@ -16,8 +16,7 @@ class TemperatureController {
   }
 
   @GetMapping("/test")
-  String testTemperatures(@RequestParam Integer fromDay, @RequestParam Integer toDay) {
-    temperatureFacade.testTemperatures(fromDay, toDay);
-    throw new UnsupportedOperationException("");
+  TemperatureInRangeReportDto testTemperatures(@RequestParam Integer fromDay, @RequestParam Integer toDay) {
+    return TemperatureInRangeReportDto.of(temperatureFacade.testTemperatures(fromDay, toDay));
   }
 }

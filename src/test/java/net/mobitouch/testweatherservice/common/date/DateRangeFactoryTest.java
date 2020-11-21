@@ -21,11 +21,14 @@ class DateRangeFactoryTest {
   private DateRangeFactory factory;
 
   @Mock
+  private CurrentDatePolicy currentDatePolicy;
+
+  @Mock
   private DateFactory clock;
 
   @Test
   void shouldCreateDateRange() {
-    mockClock();
+    initMocks();
     DateRange dateRange = factory.of(10, 20);
 
     assertThat(dateRange.getStartDate())
@@ -46,7 +49,7 @@ class DateRangeFactoryTest {
   void shouldNotCreateDateRange_toDayBeforeFromDay() {
     assertThatThrownBy(() -> factory.of(2, 1))
         .isInstanceOf(IllegalArgumentException.class)
-        .hasMessageContaining("toDay must be higher number than fromDay");
+        .hasMessageContaining("startDate cannot be set after endDate in date range");
   }
 
   @Test
@@ -63,7 +66,8 @@ class DateRangeFactoryTest {
         .hasMessageContaining("both days must be positive values");
   }
 
-  private void mockClock() {
+  private void initMocks() {
+    when(currentDatePolicy.forecastToday()).thenReturn(true);
     when(clock.now()).thenReturn(NOW);
   }
 }
