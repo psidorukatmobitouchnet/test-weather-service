@@ -1,5 +1,6 @@
 package net.mobitouch.testweatherservice.temperature;
 
+import lombok.AllArgsConstructor;
 import lombok.Value;
 
 import java.util.List;
@@ -8,6 +9,7 @@ import static java.util.stream.Collectors.toList;
 import static net.mobitouch.testweatherservice.common.numbers.RoundDouble.round;
 
 @Value
+@AllArgsConstructor
 class TemperatureInRangeReportDto {
   List<TemperatureDto> days;
   List<TemperatureDto> validDays;

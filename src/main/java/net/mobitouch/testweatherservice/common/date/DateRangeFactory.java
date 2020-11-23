@@ -34,7 +34,7 @@ public class DateRangeFactory {
       startDate = currentDay.withDayOfMonth(fromDay);
       endDate = currentDay.withDayOfMonth(toDay);
     } catch (DateTimeException e) {
-      throw new IllegalArgumentException("toDay must be higher number than fromDay");
+      throw new IllegalArgumentException("incorrect day of month");
     }
 
     if (currentDatePolicy.forecastToday()) {
